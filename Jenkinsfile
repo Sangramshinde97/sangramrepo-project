@@ -14,13 +14,13 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/Ashfaque-9x/a-youtube-clone-app.git'
+                git branch: 'main', url: ''
             }
         }
         stage("Sonarqube Analysis") {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Youtube-CICD \
+                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=sangram-project \
                     -Dsonar.projectKey=Youtube-CICD'''
                 }
             }

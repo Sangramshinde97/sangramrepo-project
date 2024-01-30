@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=sangram-project \
-                    -Dsonar.projectKey=Youtube-CICD'''
+                    -Dsonar.projectKey=sangram-project'''
                 }
             }
         }
@@ -43,15 +43,15 @@ pipeline {
                  script{
                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){   
                       sh "docker build -t youtube-clone ."
-                      sh "docker tag youtube-clone ashfaque9x/youtube-clone:latest "
-                      sh "docker push ashfaque9x/youtube-clone:latest "
+                      sh "docker tag youtube-clone sangram/sangram-project:latest "
+                      sh "docker push sangram/sangram-project:latest "
                     }
                 }
             }
         }
         stage("TRIVY Image Scan"){
             steps{
-                sh "trivy image ashfaque9x/youtube-clone:latest > trivyimage.txt" 
+                sh "trivy image sangram/sangram-project:latest > trivyimage.txt" 
             }
         }
         stage('Deploy to Kubernets'){

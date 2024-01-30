@@ -13,11 +13,6 @@ pipeline {
                 cleanWs()
             }
         }
-        stage('Checkout from Git') {
-            steps {
-                git branch: 'main', url: 'https://github.com/Sangramshinde97/sangramrepo-project.git'
-            }
-        }
         stage("Sonarqube Analysis") {
             steps {
                 withSonarQubeEnv('SonarQube-Server') {

@@ -42,27 +42,30 @@ pipeline {
              steps{
                  script{
                    withDockerRegistry(credentialsId: 'dockerhub', toolName: 'docker'){   
-                      sh "docker build -t youtube-clone ."
-                      sh "docker tag youtube-clone sangram/sangram-project:latest "
-                      sh "docker push sangram/sangram-project:latest "
+                      sh "docker build -t sangram/sangram-project:${BUILD_NUMBER} ."
+                      sh "docker push sangram/sangram-project:${BUILD_NUMBER}"
                     }
                 }
             }
         }
         stage("TRIVY Image Scan"){
             steps{
-                sh "trivy image sangram/sangram-project:latest > trivyimage.txt" 
+                sh "trivy image sangram/sangram-project:${BUILD_NUMBER} > trivyimage.txt" 
             }
         }
         stage('Deploy to Kubernets'){
             steps{
                 script{
-                    dir('Kubernetes') {
-                      withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                      sh 'kubectl delete --all pods'
-                      sh 'kubectl apply -f deployment.yml'
-                      sh 'kubectl apply -f service.yml'
-                      }   
+                    withCredentials([usernamePassword(credentialsId: 'f87a34a8-0e09-45e7-b9cf-6dc68feac670', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh '''
+                        cat deploy.yaml
+                        sed -i '' "s/32/${BUILD_NUMBER}/g" deploy.yaml
+                        cat deploy.yaml
+                        git add deploy.yaml
+                        git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
+                        git remote -v
+                        git push https://github.com/iam-veeramalla/cicd-demo-manifests-repo.git HEAD:main
+                        '''                        
                     }
                 }
             }

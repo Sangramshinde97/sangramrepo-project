@@ -78,5 +78,5 @@ pipeline {
             to: 'ashfaque.s510@gmail.com',                              
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
-    }
+      }
 }

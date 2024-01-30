@@ -64,7 +64,7 @@ pipeline {
                         git add deploy.yaml
                         git commit -m 'Updated the deploy yaml | Jenkins Pipeline'
                         git remote -v
-                        git push https://github.com/Sangramshinde97/sangramrepo-project.git/Kubernets HEAD:master
+                        git push https://github.com/Sangramshinde97/sangramrepo-project/Kubernetes HEAD:master
                         '''                        
                     }
                 }
@@ -78,7 +78,7 @@ pipeline {
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
                 "URL: ${env.BUILD_URL}<br/>",
-            to: 'ashfaque.s510@gmail.com',                              
+            to: 'sangramshinde97@gmail.com',                              
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
       }

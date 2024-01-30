@@ -1,6 +1,7 @@
 pipeline {
     agent any
     tools {
+        jdk 'jdk17'
         nodejs 'node16'
     }
     environment {
@@ -14,7 +15,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: ''
+                git branch: 'main', url: 'https://github.com/Sangramshinde97/sangramrepo-project.git'
             }
         }
         stage("Sonarqube Analysis") {

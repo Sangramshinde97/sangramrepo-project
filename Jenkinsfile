@@ -82,5 +82,5 @@ pipeline {
             to: 'sangramshinde97@gmail.com',                              
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
-      }
-}
+  }
+} 

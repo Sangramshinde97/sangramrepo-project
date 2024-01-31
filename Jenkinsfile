@@ -25,18 +25,8 @@ pipeline {
                 echo 'Running docker push...'
             }
         }
-        stage('sangram') {
-            steps {
-                echo 'Pushing...'
-                echo 'Running docker push...'
-            }
-        }
-        stage('shinde') {
-            steps {
-                echo 'Pushing...'
-                echo 'Running docker push...'
-            }
-        }
+        
+        
     }
     
     post {

@@ -25,6 +25,12 @@ pipeline {
                 echo 'Running docker push...'
             }
         }
+        stage('sangram') {
+            steps {
+                echo 'Pushing...'
+                echo 'Running docker push...'
+            }
+        }
         
         
     }
